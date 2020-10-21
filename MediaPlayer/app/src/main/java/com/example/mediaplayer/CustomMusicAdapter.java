@@ -2,6 +2,7 @@ package com.example.mediaplayer;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,13 +64,21 @@ public class CustomMusicAdapter extends BaseAdapter {
        viewHolder.textName.setText(canciones.getTitulo());
        viewHolder.textArtist.setText(canciones.getArtista());
 
-       viewHolder.textName.setOnClickListener(new View.OnClickListener() {
+       /*viewHolder.textName.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                mediaPlayer = MediaPlayer.create(context, canciones.getSong());
-               mediaPlayer.start();
+               if(v.) {
+                   Log.i("aaaaa", "playing");
+                   mediaPlayer.stop();
+                   mediaPlayer = MediaPlayer.create(context, canciones.getSong());
+                   mediaPlayer.start();
+               } else {
+                   Log.i("aaaaa", "Not playing");
+                   mediaPlayer.start();
+               }
            }
-       });
+       });*/
 
        return convertview;
     }

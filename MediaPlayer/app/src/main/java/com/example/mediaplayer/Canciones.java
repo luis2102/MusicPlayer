@@ -1,24 +1,21 @@
 package com.example.mediaplayer;
 
-import android.media.Image;
+import java.io.Serializable;
 
-public class Canciones {
+public class Canciones implements Serializable {
 
     private String titulo;
     private String artista;
     private byte[] imagen;
     private int song;
+    private String duracion;
 
-    public Canciones(String titulo, String artista, byte[] imagen, int song) {
+    public Canciones(String titulo, String artista, int song, String duracion, byte[] imagen) {
         this.titulo = titulo;
         this.artista = artista;
-        this.imagen = imagen;
         this.song = song;
-    }
-
-    public Canciones(String titulo, String artista) {
-        this.titulo = titulo;
-        this.artista = artista;
+        this.duracion = duracion;
+        this.imagen = imagen;
     }
 
     public String getTitulo() {
@@ -48,4 +45,8 @@ public class Canciones {
     public int getSong() { return song; }
 
     public  void setSong(int song) { this.song = song; }
+
+    public String getDuracion() { return duracion; }
+
+    public void setDuracion(String duracion) { this.duracion = duracion; }
 }
