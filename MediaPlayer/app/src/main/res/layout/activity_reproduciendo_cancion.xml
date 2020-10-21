@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="7"
+    android:background="@color/colorPrimary"
+    tools:context=".ReproduciendoCancion">
+
+    <ImageView
+        android:id="@+id/quitar"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        android:layout_weight=".6"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:onClick="cerrar"
+        android:src="@drawable/ic_keyboard_arrow_down_black_24dp"/>
+
+    <ImageView
+        android:id="@+id/imagen"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3.5"
+        android:src="@drawable/imagen"/>
+
+    <TextView
+        android:id="@+id/nombreCancion"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".4"
+        android:text="Nombre de cancion"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:gravity="center|bottom"
+        android:maxLines="1"/>
+
+    <TextView
+        android:id="@+id/artistaCancion"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".4"
+        android:text="Artista"
+        android:textColor="#A3A3A3"
+        android:textSize="12sp"
+        android:gravity="center|top"
+        android:maxLines="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_weight=".9">
+
+        <TextView
+            android:id="@+id/inicioCancion"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".5"
+            android:text="0:00"
+            android:textColor="#A3A3A3"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:maxLines="1"/>
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2" />
+
+        <TextView
+            android:id="@+id/finCancion"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".5"
+            android:text="0:00"
+            android:textColor="#A3A3A3"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:maxLines="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        android:layout_weight=".6">
+
+        <ImageView
+            android:id="@+id/aleatorio"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="aleatorio"
+            android:src="@drawable/ic_shuffle_black_24dp"/>
+
+        <ImageView
+            android:id="@+id/cancionAnterior"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="cancionAnterior"
+            android:src="@drawable/ic_skip_previous_black_24dp"/>
+
+        <ImageView
+            android:id="@+id/play_pausa"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="reanudar"
+            android:src="@drawable/ic_play_circle_outline_black_24dp"/>
+
+        <ImageView
+            android:id="@+id/cancionSiguiente"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="cancionSiguiente"
+            android:src="@drawable/ic_skip_next_black_24dp"/>
+
+        <ImageView
+            android:id="@+id/agregar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_add_circle_black_24dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".01"
+        android:background="@color/colorPrimaryDark">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        android:layout_weight=".63">
+
+        <Button
+            android:id="@+id/cancones"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Canciones"
+            android:textColor="#FFFFFF"
+            android:textSize="13dp"
+            android:onClick="cerrar"
+            android:backgroundTint="@color/colorPrimary"
+            app:icon="@drawable/ic_music_note_black_24dp"
+            app:iconGravity="textStart"
+            style="@style/Widget.MaterialComponents.Button"/>
+
+        <Button
+            android:id="@+id/listas"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="#FFFFFF"
+            android:textSize="13dp"
+            app:icon="@drawable/ic_library_music_black_24dp"
+            app:iconGravity="textStart"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Playlists" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

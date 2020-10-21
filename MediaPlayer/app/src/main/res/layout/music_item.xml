@@ -10,15 +10,17 @@
 
         <TextView
             android:id="@+id/titulo"
+            style="@style/Widget.MaterialComponents.TextView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.5"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
+            android:layout_weight="1.5"
+            android:clickable="true"
+            android:onClick="reproducir"
             android:text="titulo"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            style="@style/Widget.MaterialComponents.TextView" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/artista"
