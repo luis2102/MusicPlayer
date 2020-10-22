@@ -27,6 +27,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    //BOTON IR A PLAYLISTS
+    private Button playli;
+    //////////////////////
     ArrayAdapter<String> arrayAdapter;
 
     MediaMetadataRetriever mediaMetadataRetriever, mediaMetadataRetriever2;
@@ -162,7 +165,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////7BOTON PLAYLIST
+        playli = findViewById(R.id.listas);
+        playli.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                irPlaylists();
+            }
+        });
+        ////////////////////////////////////////////////////////////////////////////////////////////////////77
     }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private void irPlaylists(){
+        Intent intent = new Intent(MainActivity.this, activity_playlists.class);
+        startActivity(intent);
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////MIO LUIS BOTON PLAYLIST
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
