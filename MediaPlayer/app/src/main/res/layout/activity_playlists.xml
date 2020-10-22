@@ -19,7 +19,6 @@
             app:icon="@drawable/ic_playlist_add_black_24dp"
             style="@style/Widget.MaterialComponents.Button"/>
 
-
         <EditText
             android:id="@+id/editText"
             android:layout_width="match_parent"
