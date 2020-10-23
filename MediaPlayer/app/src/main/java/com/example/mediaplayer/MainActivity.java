@@ -3,13 +3,10 @@ package com.example.mediaplayer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -37,14 +34,13 @@ import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity {
 
-    NotificationManager notificationManager;
     private Button playli; //////////////BOTON PLAYLIST
 
     ArrayAdapter<String> arrayAdapter;
 
     MediaMetadataRetriever mediaMetadataRetriever, mediaMetadataRetriever2;
 
-    String filename = "cancion1";
+    String filename = "cancion11";
     private ArrayList<Canciones> arrayList, listaCanciones;
     private CustomMusicAdapter adapter;
     private ListView songList;
@@ -59,23 +55,13 @@ public class MainActivity extends AppCompatActivity {
     private ImageView reanudar;
     private int pActual;
     private final static int REQUEST_CODE = 1000;
+    private final static int REQUEST_CODE2 = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            createChannel();
-        }
-
-        /*reanudar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CreateNotification.createNotification(MainActivity.this, R.drawable.ic_pause_circle_outline_black_24dp, cancionActual.get
-                        1);
-            }
-        });*/
         //Intent intent = new Intent();
         //position = intent.getIntExtra("index", -1);
         //pActual = intent.getIntExtra("pos", -1);
@@ -109,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             mediaMetadataRetriever.setDataSource("/data/data/com.example.mediaplayer/files/cancion1");
             arrayList.add(new Canciones(mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE),
-                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM), 2131689474,
+                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM), 2131689472,
                     mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION), mediaMetadataRetriever.getEmbeddedPicture()));
             cancionActual = (TextView) findViewById(R.id.cancion);
             artistaActual = (TextView) findViewById(R.id.cancion_artista);
@@ -117,11 +103,11 @@ public class MainActivity extends AppCompatActivity {
             artistaActual.setText(mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM));
             mediaMetadataRetriever.setDataSource("/data/data/com.example.mediaplayer/files/cancion2");
             arrayList.add(new Canciones(mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE),
-                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM), 2131689476,
+                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM), 2131689473,
                     mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION), mediaMetadataRetriever.getEmbeddedPicture()));
             mediaMetadataRetriever.setDataSource("/data/data/com.example.mediaplayer/files/cancion3");
             arrayList.add(new Canciones(mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE),
-                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM), 2131689472,
+                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM), 2131689474,
                     mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION), mediaMetadataRetriever.getEmbeddedPicture()));
             mediaMetadataRetriever.setDataSource("/data/data/com.example.mediaplayer/files/cancion4");
             arrayList.add(new Canciones(mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE),
@@ -129,9 +115,32 @@ public class MainActivity extends AppCompatActivity {
                     mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION), mediaMetadataRetriever.getEmbeddedPicture()));
             mediaMetadataRetriever.setDataSource("/data/data/com.example.mediaplayer/files/cancion5");
             arrayList.add(new Canciones(mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE),
-                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM), 2131689473,
-                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION),
-                    mediaMetadataRetriever.getEmbeddedPicture()));
+                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM), 2131689476,
+                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION), mediaMetadataRetriever.getEmbeddedPicture()));
+            mediaMetadataRetriever.setDataSource("/data/data/com.example.mediaplayer/files/cancion6");
+            arrayList.add(new Canciones(mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE),
+                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM), 2131689477,
+                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION), mediaMetadataRetriever.getEmbeddedPicture()));
+            mediaMetadataRetriever.setDataSource("/data/data/com.example.mediaplayer/files/cancion7");
+            arrayList.add(new Canciones(mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE),
+                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM), 2131689478,
+                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION), mediaMetadataRetriever.getEmbeddedPicture()));
+            mediaMetadataRetriever.setDataSource("/data/data/com.example.mediaplayer/files/cancion8");
+            arrayList.add(new Canciones(mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE),
+                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM), 2131689479,
+                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION), mediaMetadataRetriever.getEmbeddedPicture()));
+            mediaMetadataRetriever.setDataSource("/data/data/com.example.mediaplayer/files/cancion9");
+            arrayList.add(new Canciones(mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE),
+                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM), 2131689480,
+                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION), mediaMetadataRetriever.getEmbeddedPicture()));
+            mediaMetadataRetriever.setDataSource("/data/data/com.example.mediaplayer/files/cancion10");
+            arrayList.add(new Canciones(mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE),
+                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM), 2131689481,
+                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION), mediaMetadataRetriever.getEmbeddedPicture()));
+            mediaMetadataRetriever.setDataSource("/data/data/com.example.mediaplayer/files/cancion11");
+            arrayList.add(new Canciones(mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE),
+                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM), 2131689482,
+                    mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION), mediaMetadataRetriever.getEmbeddedPicture()));
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
@@ -155,11 +164,17 @@ public class MainActivity extends AppCompatActivity {
         adapter = new CustomMusicAdapter(this, R.layout.music_item, listaCanciones);
         songList.setAdapter(adapter);
 
-        /*Log.i("aaaa", String.valueOf(R.raw.black_eyed_peas_vida_loca));
-        Log.i("aaaa", String.valueOf(R.raw.daft_punk_one_more_time));
-        Log.i("aaaa", String.valueOf(R.raw.in_your_eyes));
-        Log.i("aaaa", String.valueOf(R.raw.savage_love));
-        Log.i("aaaa", String.valueOf(R.raw.welcome));*/
+        /*Log.i("aaaaANGEL", String.valueOf(R.raw.angel_elefante));
+        Log.i("aaaaBLACK", String.valueOf(R.raw.black_eyed_peas_vida_loca));
+        Log.i("aaaaDAFT", String.valueOf(R.raw.daft_punk_one_more_time));
+        Log.i("aaaaELLA", String.valueOf(R.raw.ella_y_yo));
+        Log.i("aaaaGASO", String.valueOf(R.raw.gasolina));
+        Log.i("aaaaIN", String.valueOf(R.raw.in_your_eyes));
+        Log.i("aaaaMUSICA", String.valueOf(R.raw.musica_ligera));
+        Log.i("aaaaPERDO", String.valueOf(R.raw.perdoname));
+        Log.i("aaaaSAVA", String.valueOf(R.raw.savage_love));
+        Log.i("aaaaTUNAK", String.valueOf(R.raw.tunak_tunak));
+        Log.i("aaaaWELC", String.valueOf(R.raw.welcome));*/
         //mediaPlayer = MediaPlayer.create(this, 2131689472);
        // mediaPlayer.start();
 
@@ -193,22 +208,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-    private void createChannel() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel(CreateNotification.CHANNEL_ID,
-                    "KOD Dev", NotificationManager.IMPORTANCE_LOW);
-
-            notificationManager = getSystemService(NotificationManager.class);
-            if(notificationManager != null){
-                notificationManager.createNotificationChannel(channel);
-            }
-        }
-    }
-
     private void irPlaylists(){
-        Intent intent = new Intent(MainActivity.this, activity_playlists.class);
-        startActivity(intent);
+        //Intent intent = new Intent(MainActivity.this, activity_playlists.class);
+        //startActivity(intent);
+
+        Intent intent = new Intent(this, activity_playlists.class);
+        int posicion = mediaPlayer.getCurrentPosition();
+        intent.putExtra("canciones", arrayList);
+        intent.putExtra("pos", posicion);
+        intent.putExtra("index", position);
+        mediaPlayer.release();
+        startActivityForResult(intent, REQUEST_CODE2);
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////MIO LUIS BOTON PLAYLIST
 
@@ -325,6 +335,30 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, intent);
 
         if((requestCode == REQUEST_CODE) && (resultCode == Activity.RESULT_OK)) {
+            position = intent.getIntExtra("index", 0);
+            pActual = intent.getIntExtra("pos", 0);
+            arrayList = (ArrayList<Canciones>) intent.getSerializableExtra("canciones");
+            if (mediaPlayer != null) mediaPlayer.release();
+            if (position >= 0) {
+                canciones = arrayList.get(position);
+                mediaPlayer = new MediaPlayer();
+                Uri u = Uri.parse("android.resource://com.example.mediaplayer/raw/" + canciones.getSong());
+                try {
+                    mediaPlayer.setDataSource(MainActivity.this, u);
+                    //mediaPlayer.prepareAsync();
+                    mediaPlayer.prepare();
+                    mediaPlayer.seekTo(pActual);
+                    mediaPlayer.start();
+                    reanudar.setImageResource(R.drawable.ic_pause_circle_outline_black_24dp);
+                    cancionActual.setText(canciones.getTitulo() + " - ");
+                    artistaActual.setText(canciones.getArtista());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        if((requestCode == REQUEST_CODE2) && (resultCode == Activity.RESULT_OK)) {
             position = intent.getIntExtra("index", 0);
             pActual = intent.getIntExtra("pos", 0);
             arrayList = (ArrayList<Canciones>) intent.getSerializableExtra("canciones");

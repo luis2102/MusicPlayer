@@ -9,15 +9,16 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Canciones"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity_select_playlist"></activity>
-        <activity android:name=".activity_playlists" />
+        <activity android:name=".activity_playlists"
+            android:label="Playlists" />
         <activity android:name=".ReproduciendoCancion" />
         <activity android:name=".cancion" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:label="Canciones">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

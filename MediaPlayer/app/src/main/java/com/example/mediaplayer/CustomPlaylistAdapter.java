@@ -1,8 +1,6 @@
 package com.example.mediaplayer;
 
 import android.content.Context;
-import android.media.MediaPlayer;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class CustomPlaylistAdapter extends BaseAdapter {
 
@@ -65,6 +61,4 @@ public class CustomPlaylistAdapter extends BaseAdapter {
 
         return convertview;
     }
-
-
 }

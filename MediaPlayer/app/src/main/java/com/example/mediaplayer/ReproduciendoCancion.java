@@ -116,6 +116,7 @@ import java.util.concurrent.TimeUnit;
         nombre.setText(canciones.getTitulo());
         artista.setText(canciones.getArtista());
         reanudar.setImageResource(R.drawable.ic_pause_circle_outline_black_24dp);
+        setTitle("");
     }
 
     private Runnable UpdateSongTime = new Runnable() {
@@ -225,6 +226,17 @@ import java.util.concurrent.TimeUnit;
             mediaPlayer.release();
             //startActivity(intent);
             finish();
+        }
+
+        public void irCanciones(View view) {
+            Intent intent = new Intent(ReproduciendoCancion.this, MainActivity.class);
+            int posicion = mediaPlayer.getCurrentPosition();
+            int position = index;
+            intent.putExtra("canciones", arrayList);
+            intent.putExtra("pos", posicion);
+            intent.putExtra("index", position);
+            mediaPlayer.release();
+            startActivity(intent);
         }
 
         public void aleatorio(View view) {

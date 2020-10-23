@@ -61,6 +61,7 @@
             android:background="@color/colorPrimary"
             android:gravity="right|center"
             android:maxLines="1"
+            android:onClick="reproduciendo"
             android:textColor="#FFFFFF"
             android:textSize="12sp" />
 
@@ -72,6 +73,7 @@
             android:background="@color/colorPrimary"
             android:gravity="left|center"
             android:maxLines="1"
+            android:onClick="reproduciendo"
             android:textColor="#A3A3A3"
             android:textSize="12sp" />
 

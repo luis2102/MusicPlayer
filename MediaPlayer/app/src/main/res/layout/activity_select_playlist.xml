@@ -20,15 +20,92 @@
         android:textColor="#FFFFFF"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
     -->
-    <ImageView
-        android:id="@+id/imageView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:src="@drawable/imagen2"/>
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1"
+            android:weightSum="2"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/imagen1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/imagen"
+                    android:paddingLeft="45sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/imagen2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/imagen"
+                    android:paddingLeft="45sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1"
+            android:weightSum="2"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/imagen3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/imagen"
+                    android:paddingRight="45sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/imagen4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/imagen"
+                    android:paddingRight="45sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/button"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/design_default_color_secondary_variant"
         android:text="Agregar Canciones"
@@ -124,6 +201,7 @@
             android:text="Canciones"
             android:textColor="#FFFFFF"
             android:textSize="13dp"
+            android:onClick="irCanciones"
             android:backgroundTint="@color/colorPrimary"
             app:icon="@drawable/ic_music_note_black_24dp"
             app:iconGravity="textStart"
@@ -137,6 +215,7 @@
             android:layout_weight="1"
             android:textColor="#FFFFFF"
             android:textSize="13dp"
+            android:onClick="irPlaylists"
             app:icon="@drawable/ic_library_music_black_24dp"
             app:iconGravity="textStart"
             android:backgroundTint="@color/colorPrimary"
