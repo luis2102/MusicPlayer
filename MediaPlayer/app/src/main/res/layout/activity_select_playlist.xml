@@ -2,47 +2,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:weightSum="3"
     android:background="@color/colorPrimary"
-    tools:context=".activity_playlists">
+    tools:context=".activity_select_playlist">
+
+   <!-- <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFFFFF"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+    -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@drawable/imagen2"/>
 
     <Button
-        android:id="@+id/crearplaylist"
+        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Crear Playlist"
-        android:layout_marginLeft="70dp"
-        android:layout_marginRight="70dp"
-        app:icon="@drawable/ic_playlist_add_black_24dp"
-        style="@style/Widget.MaterialComponents.Button"/>
-
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Nombra tu Playlist"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF" />
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        android:text="Agregar Canciones"
+        android:textColorHint="@color/colorAccent" />
 
     <ListView
-        android:id="@+id/playlistsList"
+        android:id="@+id/songList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="10dp"
         android:layout_weight="2.5"
-        android:background="@color/colorPrimaryDark"
-        android:cacheColorHint="@color/design_default_color_on_primary">
-
-    </ListView>
+        android:background="@color/colorPrimaryDark"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,27 +50,32 @@
         android:background="@color/colorPrimary"
         android:backgroundTint="@color/colorPrimaryDark">
 
+
         <TextView
             android:id="@+id/cancion"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_weight="1.2"
+            android:text="TextView"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:onClick="reproduciendo"
             android:background="@color/colorPrimary"
             android:gravity="right|center"
-            android:maxLines="1"
-            android:textColor="#FFFFFF"
-            android:textSize="12sp" />
+            android:maxLines="1"/>
 
         <TextView
             android:id="@+id/cancion_artista"
             android:layout_width="130dp"
             android:layout_height="match_parent"
             android:layout_weight="1.2"
+            android:text="TextView"
+            android:textColor="#A3A3A3"
+            android:textSize="12sp"
+            android:onClick="reproduciendo"
             android:background="@color/colorPrimary"
             android:gravity="left|center"
-            android:maxLines="1"
-            android:textColor="#A3A3A3"
-            android:textSize="12sp" />
+            android:maxLines="1"/>
 
         <ImageView
             android:id="@+id/play_pause"
@@ -91,16 +93,19 @@
             android:layout_height="match_parent"
             android:layout_weight=".3"
             android:paddingTop="5dp"
+            android:onClick="siguiente"
             android:background="@color/colorPrimary"
             android:layout_gravity="center"
             android:src="@drawable/ic_skip_next_black_24dp"/>
-    </LinearLayout>
 
-    <LinearLayout
+</LinearLayout>
+
+<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight=".01"
+        android:layout_weight=".005"
         android:background="@color/colorPrimaryDark">
+
     </LinearLayout>
 
     <LinearLayout
@@ -138,6 +143,5 @@
             android:text="Playlists" />
 
     </LinearLayout>
-
 
 </LinearLayout>

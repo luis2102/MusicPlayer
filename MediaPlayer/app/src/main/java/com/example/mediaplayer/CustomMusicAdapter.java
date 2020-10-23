@@ -10,23 +10,28 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class CustomMusicAdapter extends BaseAdapter {
 
     private Context context;
     private int layout;
     private ArrayList<Canciones> arrayList;
+    private List<Canciones> nombre;
     private MediaPlayer mediaPlayer;
 
     public CustomMusicAdapter(Context context, int layout, ArrayList<Canciones> arrayList) {
         this.context = context;
         this.layout = layout;
-        this.arrayList = arrayList;
+        this.nombre = arrayList;
+        this.arrayList = new ArrayList<>();
+        this.arrayList.addAll(arrayList);
     }
 
     @Override
     public int getCount() {
-        return arrayList.size();
+        return nombre.size();
     }
 
     @Override
@@ -37,6 +42,21 @@ public class CustomMusicAdapter extends BaseAdapter {
     @Override
     public long getItemId(int i) {
         return 0;
+    }
+
+    public void cancionesOrdenadas(ArrayList<Canciones> listaCanciones) {
+        nombre = listaCanciones;
+        notifyDataSetChanged();
+    }
+
+    public void ArtistasOrdenadas(ArrayList<Canciones> listaCanciones) {
+        nombre = listaCanciones;
+        notifyDataSetChanged();
+    }
+
+    public void OrdenarNormal() {
+        nombre = arrayList;
+        notifyDataSetChanged();
     }
 
     private class ViewHolder {
@@ -59,7 +79,7 @@ public class CustomMusicAdapter extends BaseAdapter {
            viewHolder = (ViewHolder) convertview.getTag();
        }
 
-       final Canciones canciones = arrayList.get(position);
+       final Canciones canciones = nombre.get(position);
 
        viewHolder.textName.setText(canciones.getTitulo());
        viewHolder.textArtist.setText(canciones.getArtista());
@@ -81,5 +101,20 @@ public class CustomMusicAdapter extends BaseAdapter {
        });*/
 
        return convertview;
+    }
+
+    public void filter(String text) {
+        text = text.toLowerCase(Locale.getDefault());
+        nombre.clear();
+        if (text.length() == 0) {
+            nombre.addAll(arrayList);
+        } else {
+            for(Canciones cancion : arrayList) {
+                if(cancion.getTitulo().toLowerCase(Locale.getDefault()).contains(text) || cancion.getArtista().toLowerCase(Locale.getDefault()).contains(text)) {
+                    nombre.add(cancion);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }

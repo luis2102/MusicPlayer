@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MediaPlayer</string>
+    <!--<string-array name="cancionesPlay">
+        <item>Play List #1</item>
+        <item>Play List #2</item>
+        <item>Play List #3</item>
+
+    </string-array>-->
 </resources>

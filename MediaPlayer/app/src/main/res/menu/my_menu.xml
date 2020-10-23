@@ -26,4 +26,9 @@
         android:title="Artistas"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/ordenar_normal"
+        android:title="Últimas agregadas"
+        app:showAsAction="never" />
+
 </menu>

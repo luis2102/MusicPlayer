@@ -3,9 +3,13 @@ package com.example.mediaplayer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -22,20 +26,25 @@ import android.media.MediaMetadataRetriever;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity {
 
-    //BOTON IR A PLAYLISTS
-    private Button playli;
-    //////////////////////
+    NotificationManager notificationManager;
+    private Button playli; //////////////BOTON PLAYLIST
+
     ArrayAdapter<String> arrayAdapter;
 
     MediaMetadataRetriever mediaMetadataRetriever, mediaMetadataRetriever2;
 
     String filename = "cancion1";
-
     private ArrayList<Canciones> arrayList, listaCanciones;
     private CustomMusicAdapter adapter;
     private ListView songList;
@@ -56,13 +65,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            createChannel();
+        }
+
+        /*reanudar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CreateNotification.createNotification(MainActivity.this, R.drawable.ic_pause_circle_outline_black_24dp, cancionActual.get
+                        1);
+            }
+        });*/
         //Intent intent = new Intent();
         //position = intent.getIntExtra("index", -1);
         //pActual = intent.getIntExtra("pos", -1);
-        mediaPlayer = MediaPlayer.create(this, R.raw.in_your_eyes);
+        mediaPlayer = MediaPlayer.create(this, R.raw.welcome);
 
-        /*
-        InputStream inStream = getResources().openRawResource(R.raw.in_your_eyes);
+        /*InputStream inStream = getResources().openRawResource(R.raw.welcome);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         byte[] buff = new byte[10240];
         int i = Integer.MAX_VALUE;
@@ -133,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         }*/
 
         listaCanciones = arrayList;
-        adapter = new CustomMusicAdapter(this, R.layout.music_item, arrayList);
+        adapter = new CustomMusicAdapter(this, R.layout.music_item, listaCanciones);
         songList.setAdapter(adapter);
 
         /*Log.i("aaaa", String.valueOf(R.raw.black_eyed_peas_vida_loca));
@@ -164,7 +183,6 @@ public class MainActivity extends AppCompatActivity {
                 mediaPlayer.start();
             }
         });*/
-
         ////////////////////////////////////////////////////////////////////////////////////////////////7BOTON PLAYLIST
         playli = findViewById(R.id.listas);
         playli.setOnClickListener(new View.OnClickListener() {
@@ -173,52 +191,49 @@ public class MainActivity extends AppCompatActivity {
                 irPlaylists();
             }
         });
-        ////////////////////////////////////////////////////////////////////////////////////////////////////77
+
     }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private void createChannel() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel(CreateNotification.CHANNEL_ID,
+                    "KOD Dev", NotificationManager.IMPORTANCE_LOW);
+
+            notificationManager = getSystemService(NotificationManager.class);
+            if(notificationManager != null){
+                notificationManager.createNotificationChannel(channel);
+            }
+        }
+    }
+
     private void irPlaylists(){
         Intent intent = new Intent(MainActivity.this, activity_playlists.class);
         startActivity(intent);
     }
-////////////////////////////////////////////////////////////////////////////////////////////////////MIO LUIS BOTON PLAYLIST
+    ////////////////////////////////////////////////////////////////////////////////////////////////////MIO LUIS BOTON PLAYLIST
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.clear();
-        MenuInflater inflater = getMenuInflater();
-        //getMenuInflater().inflate(R.menu.my_menu, menu);
+        getMenuInflater().inflate(R.menu.my_menu, menu);
+        MenuItem menuItem = menu.findItem(R.id.search_icon);
 
-        if (menu.findItem(R.id.ordenar_canciones) == findViewById(R.id.ordenar_canciones)) {
-            inflater.inflate(R.menu.my_menu, menu);
-            String ordenar_canciones = (String) menu.findItem(R.id.ordenar_canciones).getTitle();
-            //Log.i("aaaaa", ordenar_canciones);
-            return super.onCreateOptionsMenu(menu);
-        } else if(menu.findItem(R.id.ordenar_artista) == findViewById(R.id.ordenar_artista)) {
-            inflater.inflate(R.menu.my_menu, menu);
-            String ordenar_artistas = (String) menu.findItem(R.id.ordenar_artista).getTitle();
-            //Log.i("aaaaa", ordenar_artistas);
-            return super.onCreateOptionsMenu(menu);
-        } else {
-            MenuItem menuItem = menu.findItem(R.id.search_icon);
-            SearchView searchView = (SearchView) menuItem.getActionView();
-            searchView.setQueryHint("Buscar cancion");
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Buscar");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
 
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String s) {
-                    return false;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String s) {
-                    arrayAdapter.getFilter().filter(s);
-                    return true;
-                }
-            });
-
-            return super.onCreateOptionsMenu(menu);
-        }
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adapter.filter(s);
+                //arrayAdapter.getFilter().filter(s);
+                return false;
+            }
+        });
+        return true;
     }
 
     public void reproducir(View view) {
@@ -242,6 +257,32 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.ordenar_canciones) {
+            Collections.sort(listaCanciones, new Comparator<Canciones>() {
+                @Override
+                public int compare(Canciones canciones, Canciones t1) {
+                    return canciones.getTitulo().compareTo(t1.getTitulo());
+                }
+            });
+            adapter.cancionesOrdenadas(listaCanciones);
+        } else if(item.getItemId() == R.id.ordenar_artista) {
+            Collections.sort(listaCanciones, new Comparator<Canciones>() {
+                @Override
+                public int compare(Canciones canciones, Canciones t1) {
+                    return canciones.getArtista().compareTo(t1.getArtista());
+                }
+            });
+            adapter.ArtistasOrdenadas(listaCanciones);
+        } else if(item.getItemId() == R.id.ordenar_normal) {
+            adapter.OrdenarNormal();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void siguiente(View view) {
